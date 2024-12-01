@@ -1,0 +1,43 @@
+@startuml
+interface EditorModules {
+    // API Modules
+    + BlocksAPI : BlocksAPI
+    + CaretAPI : CaretAPI
+    + ToolsAPI : ToolsAPI
+    + EventsAPI : EventsAPI
+    + I18nAPI : I18nAPI
+    + API : API
+    + InlineToolbarAPI : InlineToolbarAPI
+    + ListenersAPI : ListenersAPI
+    + NotifierAPI : NotifierAPI
+    + ReadOnlyAPI : ReadOnlyAPI
+    + SanitizerAPI : SanitizerAPI
+    + SaverAPI : SaverAPI
+    + SelectionAPI : SelectionAPI
+    + StylesAPI : StylesAPI
+    + ToolbarAPI : ToolbarAPI
+    + TooltipAPI : TooltipAPI
+    + UiAPI : UiAPI
+
+// Toolbar Modules
+    + BlockSettings : BlockSettings
+    + Toolbar : Toolbar
+    + InlineToolbar : InlineToolbar
+
+  // Modules
+    + BlockEvents : BlockEvents
+    + BlockManager : BlockManager
+    + BlockSelection : BlockSelection
+    + Caret : Caret
+    + CrossBlockSelection : CrossBlockSelection
+    + DragNDrop : DragNDrop
+    + ModificationsObserver : ModificationsObserver
+    + Paste : Paste
+    + ReadOnly : ReadOnly
+    + RectangleSelection : RectangleSelection
+    + Renderer : Renderer
+    + Saver : Saver
+    + Tools : Tools
+    + UI : UI
+}
+@enduml

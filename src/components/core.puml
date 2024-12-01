@@ -1,0 +1,19 @@
+@startuml
+class Core {
+    + config : EditorConfig
+    + moduleInstances : EditorModules
+    + isReady : Promise<void>
+    - eventsDispatcher : EventsDispatcher<EditorEventMap>
+
+    + constructor(config?: EditorConfig|string)
+    + set configuration(config: EditorConfig|string)
+    + get configuration(): EditorConfig
+    + validate(): void
+    + init(): void
+    + start(): Promise<void>
+    - render(): Promise<void>
+    - constructModules(): void
+    - configureModules(): void
+    - getModulesDiff(name: string): EditorModules
+}
+@enduml

@@ -1,0 +1,10 @@
+@startuml
+class EditorJS {
+    - isReady : Promise<void>
+    - destroy : () => void
+    + version : string {static}
+
+    + constructor(configuration?: EditorConfig|string)
+    + exportAPI(editor: Core) : void
+}
+@enduml

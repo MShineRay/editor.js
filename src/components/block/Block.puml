@@ -1,0 +1,66 @@
+@startuml
+class Block extends EventsDispatcher {
+    + id : string
+    + name : string
+    + tool : BlockToolAdapter
+    + settings : ToolConfig
+    + holder : HTMLDivElement
+    + tunes : ToolsCollection<BlockTuneAdapter>
+    + config : ToolConfig
+    - cachedInputs : HTMLElement[]
+    - toolRenderedElement : HTMLElement | null
+    - toolInstance : IBlockTool
+    - tunesInstances : Map<string, IBlockTune>
+    - defaultTunesInstances : Map<string, IBlockTune>
+    - unavailableTunesData : { [name: string]: BlockTuneData }
+    - inputIndex : number
+    - editorEventBus : EventsDispatcher<EditorEventMap> | null
+    - redactorDomChangedCallback : (payload: RedactorDomChangedPayload) => void
+    - blockAPI : BlockAPIInterface
+
+    + constructor({id, data, tool, readOnly, tunesData}: BlockConstructorOptions, eventBus?: EventsDispatcher<EditorEventMap>)
+    + get inputs() : HTMLElement[]
+    + get currentInput() : HTMLElement | undefined
+    + set currentInput(element: HTMLElement)
+    + get firstInput() : HTMLElement | undefined
+    + get lastInput() : HTMLElement | undefined
+    + get nextInput() : HTMLElement | undefined
+    + get previousInput() : HTMLElement | undefined
+    + get data() : Promise<BlockToolData>
+    + get sanitize() : SanitizerConfig
+    + get mergeable() : boolean
+    + get focusable() : boolean
+    + get isEmpty() : boolean
+    + get hasMedia() : boolean
+    + set selected(state: boolean)
+    + get selected() : boolean
+    + set stretched(state: boolean)
+    + get stretched() : boolean
+    + set dropTarget(state)
+    + get pluginsContent() : HTMLElement
+    + call(methodName: string, params?: object) : void
+    + async mergeWith(data: BlockToolData) : Promise<void>
+    + async save() : Promise<undefined | SavedData>
+    + async validate(data: BlockToolData) : Promise<boolean>
+    + getTunes() : {toolTunes: PopoverItemParams[]; commonTunes: PopoverItemParams[]; }
+    + updateCurrentInput() : void
+    + dispatchChange() : void
+    + destroy() : void
+    + async getActiveToolboxEntry() : Promise<ToolboxConfigEntry | undefined>
+    + async exportDataAsString() : Promise<string>
+
+    - compose() : HTMLDivElement
+    - composeTunes(tunesData: { [name: string]: BlockTuneData }) : void
+    - handleFocus() : void
+    - addInputEvents() : void
+    - removeInputEvents() : void
+    - didMutated(mutationsOrInputEvent: MutationRecord[] | InputEvent = undefined) : void
+    - watchBlockMutations() : void
+    - unwatchBlockMutations() : void
+    - detectToolRootChange(mutations: MutationRecord[]) : void
+    - dropInputsCache() : void
+    - toggleInputsEmptyMark() : void
+
+    + static get CSS() : { [name: string]: string }
+}
+@enduml

@@ -1,0 +1,57 @@
+@startuml
+class BlockEvents {
+    - isRtl : boolean #private {static} // 假设该类中存在此私有静态属性用于判断是否为从右到左的布局，具体需根据完整代码确定其来源及用途
+
+    + keydown(event : KeyboardEvent) : void
+    + beforeKeydownProcessing(event : KeyboardEvent) : void
+    + keyup(event : KeyboardEvent) : void
+    + dragOver(event : DragEvent) : void
+    + dragLeave(event : DragEvent) : void
+    + handleCommandC(event : ClipboardEvent) : void
+    + handleCommandX(event : ClipboardEvent) : void
+    + tabPressed(event : KeyboardEvent) : void
+    + commandSlashPressed() : void
+    + slashPressed(event : KeyboardEvent) : void
+    + enter(event : KeyboardEvent) : void
+    + backspace(event : KeyboardEvent) : void
+    + delete(event : KeyboardEvent) : void
+    + mergeBlocks(targetBlock : Block, blockToMerge : Block) : void
+    + arrowRightAndDown(event : KeyboardEvent) : void
+    + arrowLeftAndUp(event : KeyboardEvent) : void
+    + needToolbarClosing(event : KeyboardEvent) : boolean
+    + activateToolbox() : void
+    + activateBlockSettings() : void
+
+    -<<private>> #private + tabPressed(event : KeyboardEvent) : void
+    -<<private>> #private + commandSlashPressed() : void
+    -<<private>> #private + slashPressed(event : KeyboardEvent) : void
+    -<<private>> #private + enter(event : KeyboardEvent) : void
+    -<<private>> #private + backspace(event : KeyboardEvent) : void
+    -<<private>> #private + delete(event : KeyboardEvent) : void
+    -<<private>> #private + mergeBlocks(targetBlock : Block, blockToMerge : Block) : void
+    -<<private>> #private + arrowRightAndDown(event : KeyboardEvent) : void
+    -<<private>> #private + arrowLeftAndUp(event : KeyboardEvent) : void
+    -<<private>> #private + needToolbarClosing(event : KeyboardEvent) : boolean
+    -<<private>> #private + activateToolbox() : void
+    -<<private>> #private + activateBlockSettings() : void
+}
+
+enum KeyboardEvent {
+    BACKSPACE
+    DELETE
+    ENTER
+    DOWN
+    RIGHT
+    UP
+    LEFT
+    TAB
+    // 其他可能的键盘事件类型可根据实际情况补充
+}
+
+enum DragEvent {}
+
+enum ClipboardEvent {}
+
+enum Block {}
+
+@enduml

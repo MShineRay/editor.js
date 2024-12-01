@@ -1,0 +1,113 @@
+@startuml
+class BlockManager {
+    - _currentBlockIndex : number #private
+    - _blocks : Blocks #private
+
+    + currentBlockIndex : number {get; set}
+    + firstBlock : Block {get}
+    + lastBlock : Block {get}
+    + currentBlock : Block | undefined {get; set}
+    + nextBlock : Block | null {get}
+    + nextContentfulBlock : Block | undefined {get}
+    + previousContentfulBlock : Block | undefined {get}
+    + previousBlock : Block | null {get}
+    + blocks : Block[] {get}
+    + isEditorEmpty : boolean {get}
+
+    + prepare() : void
+    + toggleReadOnly(readOnlyEnabled : boolean) : void
+    + composeBlock({tool: string; id?: string; data?: BlockToolData; tunes?: {[name: string]: BlockTuneData}}) : Block
+    + insert({id?: string; tool?: string; data?: BlockToolData; index?: number; needToFocus?: boolean; replace?: boolean; tunes?: {[name: string]: BlockTuneData}} = {}) : Block
+    + insertMany(blocks : Block[], index = 0) : void
+    + update(block : Block, data?: Partial<BlockToolData>, tunes?: {[name: string]: BlockTuneData}) : Promise<Block>
+    + replace(block : Block, newTool : string, data : BlockToolData) : Block
+    + paste(toolName : string, pasteEvent : PasteEvent, replace = false) : Block
+    + insertDefaultBlockAtIndex(index : number, needToFocus = false) : Block
+    + insertAtEnd() : Block
+    + mergeBlocks(targetBlock : Block, blockToMerge : Block) : Promise<void>
+    + removeBlock(block : Block, addLastBlock = true) : Promise<void>
+    + removeSelectedBlocks() : number | undefined
+    + removeAllBlocks() : void
+    + split() : Block
+    + getBlockByIndex(index : number) : Block | undefined
+    + getBlockIndex(block : Block) : number
+    + getBlockById(id) : Block | undefined
+    + getBlock(element : HTMLElement) : Block | undefined
+    + setCurrentBlockByChildNode(childNode : Node) : Block | undefined
+    + getBlockByChildNode(childNode : Node) : Block | undefined
+    + swap(fromIndex, toIndex) : void
+    + move(toIndex, fromIndex = this.currentBlockIndex) : void
+    + convert(blockToConvert : Block, targetToolName : string, blockDataOverrides?: BlockToolData) : Promise<Block>
+    + unsetCurrentBlock() : void
+    + clear(needToAddDefaultBlock = false) : Promise<void>
+    + destroy() : Promise<void>
+
+    - bindBlockEvents(block : Block) : void #private
+    - disableModuleBindings() : void #private
+    - enableModuleBindings() : void #private
+    - validateIndex(index : number) : boolean #private
+    - blockDidMutated<Type extends BlockMutationType>(mutationType : Type, block : Block, detailData : BlockMutationEventDetailWithoutTarget<Type>) : Block #private
+}
+
+class Blocks {
+    // 这里假设Blocks类有一些内部属性和方法，根据实际情况补充完整
+    + array : Block[]
+    + nodes : HTMLElement[]
+    + insert(index : number, block : Block, replace : boolean) : void
+    + insertMany(blocks : Block[], index : number) : void
+    + remove(index : number) : void
+    + swap(fromIndex, toIndex) : void
+    + move(toIndex, fromIndex) : void
+    + set : function
+    + get : function
+}
+
+class Block {
+    // 这里假设Block类有一些内部属性和方法，根据实际情况补充完整
+    + id : string
+    + name : string
+    + data : Promise<BlockToolData>
+    + tunes : {[name: string]: BlockTuneData}
+    + mergeable : boolean
+    + exportDataAsString() : Promise<string>
+    + mergeWith(data : BlockToolData) : Promise<void>
+    + save() : Promise<BlockToolData>
+    + destroy() : Promise<void>
+    + call(methodName : string, event : any) : void
+    + on(eventName : string, callback : function) : void
+    + inputs : any[]
+    + isEmpty : boolean
+    + selected : boolean
+    + holder : HTMLElement
+    + CSS : object
+    + updateCurrentInput() : void
+    + extractFragmentFromCaretPosition() : DocumentFragment
+}
+
+class Editor {
+    // 这里假设Editor类有一些内部属性和方法，根据实际情况补充完整
+    + UI : object
+    + ReadOnly : object
+    + Tools : object
+    + API : object
+    + BlockEvents : BlockEvents
+}
+
+class BlockEvents {
+    + keydown(event : KeyboardEvent) : void
+    + keyup(event : KeyboardEvent) : void
+    + dragOver(event : DragEvent) : void
+    + dragLeave(event : DragEvent) : void
+}
+
+class KeyboardEvent {}
+class DragEvent {}
+class PasteEvent {}
+class BlockToolData {}
+class BlockTuneData {}
+class BlockMutationType {}
+class BlockMutationEventMap {}
+class BlockMutationEventDetailWithoutTarget {}
+class PromiseQueue {}
+
+@enduml
