@@ -1,0 +1,35 @@
+@startuml
+class Dom {
+    + static isSingleTag(tag: HTMLElement) : boolean
+    + static isLineBreakTag(element: HTMLElement) : element is HTMLBRElement
+    + static make(tagName: string, classNames: string | (string | undefined)[] | null = null, attributes: object = {}) : HTMLElement
+    + static text(content: string) : Text
+    + static append(parent: Element | DocumentFragment, elements: Element | Element[] | DocumentFragment | Text | Text[]) : void
+    + static prepend(parent: Element, elements: Element | Element[]) : void
+    + static swap(el1: HTMLElement, el2: HTMLElement) : void
+    + static find(el: Element | Document = document, selector: string) : Element | null
+    + static get(id: string) : HTMLElement | null
+    + static findAll(el: Element | Document = document, selector: string) : NodeList
+    + static allInputsSelector : string
+    + static findAllInputs(holder: Element) : HTMLElement[]
+    + static getDeepestNode(node: Node, atLast = false) : Node | null
+    + static isElement(node: any) : node is Element
+    + static isFragment(node: any) : node is DocumentFragment
+    + static isContentEditable(element: HTMLElement) : boolean
+    + static isNativeInput(target: any) : target is HTMLInputElement | HTMLTextAreaElement
+    + static canSetCaret(target: HTMLElement) : boolean
+    + static isNodeEmpty(node: Node, ignoreChars?: string) : boolean
+    + static isLeaf(node: Node) : boolean
+    + static isEmpty(node: Node, ignoreChars?: string) : boolean
+    + static isHTMLString(str: string) : boolean
+    + static getContentLength(node: Node) : number
+    + static blockElements : string[]
+    + static containsOnlyInlineElements(data: string | HTMLElement) : boolean
+    + static getDeepestBlockElements(parent: HTMLElement) : HTMLElement[]
+    + static getHolder(element: string | HTMLElement) : HTMLElement
+    + static isAnchor(element: Element) : element is HTMLAnchorElement
+    + static offset(el) : { top: number; left: number; right: number; bottom: number }
+
+    + static get blockElements() : string[]
+}
+@enduml
